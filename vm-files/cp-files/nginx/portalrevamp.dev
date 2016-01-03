@@ -1,0 +1,41 @@
+
+
+server {
+	server_name www.portalrevamp.dev;
+	rewrite ^(.*) https://portalrevamp.dev$1 permanent;
+}
+
+server {
+	listen 80;
+	server_name portalrevamp.dev;
+	rewrite ^(.*) https://portalrevamp.dev$1 permanent;
+}
+
+server {
+
+	listen 443 ssl;
+
+	server_name portalrevamp.dev;
+
+	root /srv/portalrevamp.dev/public_html/;
+
+	ssl on;
+	ssl_certificate /etc/nginx/ssl/nginx.crt;
+	ssl_certificate_key /etc/nginx/ssl/nginx.key;
+
+	ssl_session_timeout 5m;
+
+	ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+	ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
+	ssl_prefer_server_ciphers on;
+	
+	# logging
+	access_log 	/var/log/nginx/portalrevamp.dev.access.log;
+	error_log	/var/log/nginx/portalrevamp.dev.error.log notice;
+
+	error_page 404 /404.html;
+	error_page 500 502 503 504 /50x.html;
+
+	include /etc/nginx/nginx-wp-common.conf;
+	
+}
