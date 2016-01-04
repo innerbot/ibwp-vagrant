@@ -16,9 +16,9 @@ Vagrant.configure(2) do |config|
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
-    vb.name = "bm-wp-devbox"
-    vb.memory = "1024"
-    vb.cpus = "1"
+    vb.name = "ibwp-vagrant"
+    vb.customize ["modifyvm", :id, "--memory", 1024]
+    vb.customize ["modifyvm", :id, "--cpus", 1]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
   end
