@@ -37,5 +37,6 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", path: "vm-files/provisioning/install-mariadb.sh"
   config.vm.provision "shell", path: "vm-files/provisioning/install-nodejs.sh", privileged: false
   config.vm.provision "shell", path: "vm-files/provisioning/install-wordpress.sh"
-
+  # copy over the startup script that loads web server, php and db 
+  config.vm.provision "file", source: "vm-files/cp-files/ibwp-vagrant.conf", destination: "/etc/init/ibweb-start.conf"
 end
