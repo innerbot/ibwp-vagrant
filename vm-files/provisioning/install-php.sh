@@ -15,3 +15,9 @@ cp /srv/portalrevamp.dev/public_html/vm-files/cp-files/php-fpm/portalrevamp.dev.
 # restart php and nginx
 service php5-fpm restart
 service nginx restart
+
+# let's install composer!
+curl -sS https://getcomposer.org/installer | php
+mv composer.phar /usr/local/bin/composer
+
+composer self-update
