@@ -21,6 +21,5 @@ cp "/etc/mysql/my.cnf" "/etc/mysql/my.cnf.orig"
 
 # copy config files
 cp "/srv/portalrevamp.dev/public_html/vm-files/cp-files/mariadb/my.cnf" "/etc/mysql/my.cnf"
-cp "/srv/portalrevamp.dev/public_html/vm-files/cp-files/mariadb/root-my.cnf" "/etc/mysql/root-my.cnf"
 
 service mysql restart

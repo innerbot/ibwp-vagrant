@@ -4,8 +4,8 @@
 apt-get install -y nginx-extras
 
 # make backups of the original conf + params files
-mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
-mv /etc/nginx/fastcgi_params /etc/nginx/fastcgi_params.orig
+cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
+cp /etc/nginx/fastcgi_params /etc/nginx/fastcgi_params.orig
 
 
 # install self-signed certificate
@@ -18,7 +18,7 @@ cp /srv/portalrevamp.dev/public_html/vm-files/cp-files/nginx/nginx.conf /etc/ngi
 cp /srv/portalrevamp.dev/public_html/vm-files/cp-files/nginx/fastcgi_params /etc/nginx
 cp /srv/portalrevamp.dev/public_html/vm-files/cp-files/nginx/nginx-wp-common.conf /etc/nginx
 cp /srv/portalrevamp.dev/public_html/vm-files/cp-files/nginx/portalrevamp.dev /etc/nginx/sites-available
-rm /etc/nginx/sites-enabled/default #removing default
+# rm /etc/nginx/sites-enabled/default #removing default
 
 # we need to make /var/log/nginx writable by the web server
 chown -R www-data:www-data /var/log/nginx
