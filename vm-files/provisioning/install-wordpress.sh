@@ -45,7 +45,7 @@ then
     #wp plugin activate --all --allow-root
     
     # tell wordpress that we want to user pretty links
-    wp rewrite structure '/%postname%'
+    wp rewrite structure '/%postname%' --allow-root
 fi
 
 # The Vagrant site setup script will restart Nginx for us
