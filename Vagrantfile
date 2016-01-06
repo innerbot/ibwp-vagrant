@@ -24,7 +24,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
-  config.vm.synced_folder "vm-files", "/home/vagrant/vm-files"
+  config.vm.synced_folder "vm-files/", "/home/vagrant/vm-files"
 
   if Dir.exist?( "wp-content" ) then
     config.vm.synced_folder "wp-content", "/srv/portalrevamp.dev/wp-content", owner: "www-data", group: "www-data"

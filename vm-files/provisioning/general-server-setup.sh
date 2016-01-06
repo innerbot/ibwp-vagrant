@@ -7,4 +7,4 @@ apt-get update -y
 apt-get install -y htop imagemagick poppler-utils software-properties-common git subversion
 
 # copy over the startup script that boots nginx, php, mysql
-cp /home/vagrant/vm-files/cp-files/ibwp-vagrant.conf /etc/init/ibweb-start.conf
+# cp /home/vagrant/vm-files/cp-files/ibwp-vagrant.conf /etc/init/ibweb-start.conf
