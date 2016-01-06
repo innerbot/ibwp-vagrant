@@ -20,6 +20,6 @@ apt-get install -y mariadb-server
 cp "/etc/mysql/my.cnf" "/etc/mysql/my.cnf.orig"
 
 # copy config files
-cp "/srv/portalrevamp.dev/public_html/vm-files/cp-files/mariadb/my.cnf.orig" "/etc/mysql/my.cnf"
+cp "/home/vagrant/vm-files/cp-files/mariadb/my.cnf.orig" "/etc/mysql/my.cnf"
 
 service mysql restart

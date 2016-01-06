@@ -15,7 +15,7 @@ then
 fi
 
 # Init Script for WordPress and WooCommerce Website
-echo "Setting up WP and WooCommerce E-Commerce Platform base"
+echo "Setting up WP dev box"
 
 echo "Creating a database for the project (if it's not already there)"
 mysql -u root --password=root -e "CREATE DATABASE IF NOT EXISTS portalrevamp_dev"
@@ -28,11 +28,30 @@ then
     echo "Downloading Wordpress Core"
     # Download and unzip latest version of WordPress
     wp core download --allow-root
+
+    # symlink the /srv/portalrevamp.dev/wp-content directory to the public_html directory
+    if [[ -d "wp-content" && ! -L "wp-content" && -d "/srv/portalrevamp.dev/wp-content" ]];
+    then
+        echo "Sym-linking the wp-content project directory to site"
+        rm -rf wp-content
+        ln -s /srv/portalrevamp.dev/wp-content /srv/portalrevamp.dev/public_html/wp-content 
+    fi
+
     # Use WP CLI to create a `wp-config.php` file
-    wp core config --dbname="portalrevamp_dev" --dbuser=wp --dbpass=wp --dbhost="localhost" --allow-root
+    wp core config --dbname="portalrevamp_dev" --dbuser=wp --dbpass=wp --dbhost="localhost" --allow-root --extra-php <<PHP
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_CACHE', false );
+define( 'WP_HOME', 'https://portalrevamp.dev' );
+define( 'WP_SITEURL', 'https://portalrevamp.dev' );
+PHP
+
     # Use WP CLI to install WordPress
     wp core install --url="https://portalrevamp.dev" --title="The Truth About Cancer" --admin_user="admin" --admin_password='ttac2016$$' --admin_email="admin@thetruthaboutcancer.com" --allow-root
     
+    # tell wordpress that we want to user pretty links
+    wp rewrite structure '/%postname%' --allow-root
+
     # use wp-cli to update/activate theme. 
     # the "--allow-root" flag must be included.
     # This provisioning script executes as root
@@ -44,8 +63,7 @@ then
     #wp plugin delete hello --allow-root
     #wp plugin activate --all --allow-root
     
-    # tell wordpress that we want to user pretty links
-    wp rewrite structure '/%postname%' --allow-root
+
 fi
 
 # The Vagrant site setup script will restart Nginx for us

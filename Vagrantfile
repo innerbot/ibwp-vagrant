@@ -24,8 +24,12 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
-  config.vm.synced_folder ".", "/srv/portalrevamp.dev/public_html", owner: "www-data", group: "www-data"
+  config.vm.synced_folder "vm-files", "/home/vagrant/vm-files"
 
+  if Dir.exist?( "wp-content" ) then
+    config.vm.synced_folder "wp-content", "/srv/portalrevamp.dev/wp-content", owner: "www-data", group: "www-data"
+  end
+  
   config.vm.provision "fix-no-tty", type: "shell" do |s|
     s.privileged = false
     s.inline = "sudo sed -i '/tty/!s/mesg n/tty -s \\&\\& mesg n/' /root/.profile"
