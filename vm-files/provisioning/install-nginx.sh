@@ -3,6 +3,9 @@
 # install nginx plus proxy and some other extras
 apt-get install -y nginx-extras
 
+# create the nginx init file to start nginx on system startup
+cp /home/vagrant/vm-files/cp-files/nginx/etc_init_nginx.conf /etc/init/nginx.conf
+
 # make backups of the original conf + params files
 cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
 cp /etc/nginx/fastcgi_params /etc/nginx/fastcgi_params.orig

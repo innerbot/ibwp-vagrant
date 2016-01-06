@@ -41,5 +41,6 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", path: "vm-files/provisioning/install-mariadb.sh"
   config.vm.provision "shell", path: "vm-files/provisioning/install-nodejs.sh", privileged: false
   config.vm.provision "shell", path: "vm-files/provisioning/install-wordpress.sh"
+  config.vm.provision "shell", path: "vm-files/provisioning/boot-daemons-at-startup.sh"
   
 end
