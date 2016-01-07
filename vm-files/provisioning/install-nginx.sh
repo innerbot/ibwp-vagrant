@@ -21,7 +21,7 @@ cp /home/vagrant/vm-files/cp-files/nginx/nginx.conf /etc/nginx
 cp /home/vagrant/vm-files/cp-files/nginx/fastcgi_params /etc/nginx
 cp /home/vagrant/vm-files/cp-files/nginx/nginx-wp-common.conf /etc/nginx
 cp /home/vagrant/vm-files/cp-files/nginx/portalrevamp.dev /etc/nginx/sites-available
-# rm /etc/nginx/sites-enabled/default #removing default
+rm /etc/nginx/sites-enabled/default #removing default
 
 # we need to make /var/log/nginx writable by the web server
 chown -R www-data:www-data /var/log/nginx

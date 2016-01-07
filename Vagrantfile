@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
   config.vm.box_check_update = true
 
   config.vm.hostname = "portalrevamp.dev"
-  config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "private_network", ip: "192.168.56.133"
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
@@ -29,6 +29,10 @@ Vagrant.configure(2) do |config|
   if Dir.exist?( "wp-content" ) then
     config.vm.synced_folder "wp-content", "/srv/portalrevamp.dev/wp-content", owner: "www-data", group: "www-data"
   end
+
+  if Dir.exist?( "database" ) then
+    config.vm.synced_folder "database", "/srv/portalrevamp.dev/database", owner: "www-data", group: "www-data"
+  end
   
   config.vm.provision "fix-no-tty", type: "shell" do |s|
     s.privileged = false
@@ -39,8 +43,8 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", path: "vm-files/provisioning/install-nginx.sh"
   config.vm.provision "shell", path: "vm-files/provisioning/install-php.sh"
   config.vm.provision "shell", path: "vm-files/provisioning/install-mariadb.sh"
+  # TODO: add db import script to run each boot that checks database folder for 
+  # *.sql files to import to mysql. These .sql files must be full DB dumps.  
   config.vm.provision "shell", path: "vm-files/provisioning/install-nodejs.sh", privileged: false
   config.vm.provision "shell", path: "vm-files/provisioning/install-wordpress.sh"
-  config.vm.provision "shell", path: "vm-files/provisioning/boot-daemons-at-startup.sh"
-  
 end

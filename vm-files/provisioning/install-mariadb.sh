@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# create the mysql init file to start mysql on system startup
+cp /home/vagrant/vm-files/cp-files/mariadb/etc_init_mysql.conf /etc/init/mysql.conf
 
 # add key for fetching mariadb 10.0.x
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db

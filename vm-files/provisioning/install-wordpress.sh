@@ -38,12 +38,16 @@ then
     fi
 
     # Use WP CLI to create a `wp-config.php` file
-    wp core config --dbname="portalrevamp_dev" --dbuser=wp --dbpass=wp --dbhost="localhost" --allow-root --extra-php <<PHP
-define( 'WP_DEBUG', true );
-define( 'WP_DEBUG_LOG', true );
-define( 'WP_CACHE', false );
+    wp core config --skip-salts --dbname="portalrevamp_dev" --dbuser=wp --dbpass=wp --dbhost="localhost" --allow-root --extra-php <<PHP
 define( 'WP_HOME', 'https://portalrevamp.dev' );
 define( 'WP_SITEURL', 'https://portalrevamp.dev' );
+
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+
+define( 'WP_CACHE', false );
+
+// get salts from the dev.ttac server wp-config
 PHP
 
     # Use WP CLI to install WordPress
@@ -56,12 +60,12 @@ PHP
     # the "--allow-root" flag must be included.
     # This provisioning script executes as root
     # 
-    # wp theme update storefront --allow-root
-    # wp theme activate storefront-child --allow-root
+    wp theme update storefront --allow-root
+    wp theme activate storefront-child --allow-root
 
     # use wp to activate all appropriate plugins
-    #wp plugin delete hello --allow-root
-    #wp plugin activate --all --allow-root
+    wp plugin delete hello --allow-root
+    wp plugin activate --all --allow-root
     
 
 fi

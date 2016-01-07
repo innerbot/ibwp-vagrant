@@ -6,7 +6,8 @@ apt-get install -y php5-fpm php5-common php5-curl php5-dev php5-gd php5-imagick 
 # create the php5-fpm init file to start php5-fpm on system startup
 cp /home/vagrant/vm-files/cp-files/php-fpm/etc_init_php5-fpm.conf /etc/init/php5-fpm.conf
 
-# # sockets dir must be r/w by webserver
+# create sockets dir 
+mkdir -p /var/run/php-fpm
 # chown -R www-data:www-data /var/run/php5-fpm
 
 # copy the php-fpm pool conf for your vhost
